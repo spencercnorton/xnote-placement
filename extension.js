@@ -143,7 +143,7 @@ export default class XNotePlacementExtension extends Extension {
             pads.push({id: name, title: titleOf(content), hidden: /^hidden 1$/m.test(text)});
         }
         entries.close(null);
-        pads.sort((a, b) => a.hidden - b.hidden || a.id.localeCompare(b.id));
+        pads.sort((a, b) => a.hidden - b.hidden || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
         return pads;
     }
 

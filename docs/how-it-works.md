@@ -37,12 +37,26 @@ first line never matched.
 
 Notes sharing a first line — typically several empty ones — are handed out
 in `info-*` id order, visible notes before hidden ones: a hidden note has no
-window, and before 1.1.3 it could take a visible note's record. The order is
-stable across restarts, so two empty notes keep their own positions across
-repeated relaunches. It is stable rather than exact: XNote opens its notes in
-directory order, so of two same-titled notes each may be keeping a record
-first written by the other, which only shows if one of them later gets a
-different first line — the pair then trade places once.
+window, and before 1.1.3 it could take a visible note's record. XNote 3.2.3
+and later opens its notes in that same id order, so the pairing is exact:
+each window gets the id of the note it shows. Both sides compare ids byte by
+byte (`strcmp` in XNote, `<` here). A locale-aware comparison would not do:
+it sorts letters regardless of case (`info-a1` before `info-B1`, where
+`strcmp` puts `info-B1` first), XNote's ids mix upper and lower case, and the
+extension used one before 1.1.5.
+
+Older XNote opens its notes in the order the filesystem lists their files,
+so the pairing is stable at best: of two same-titled notes each may be
+keeping a record first written by the other, which shows when one of them
+later gets a different first line — the pair then trade places once. Where a
+rewritten file is listed first, as on tmpfs, they trade places at every
+restart, because XNote rewrites its files a few seconds after it starts.
+
+One start stays inexact with any XNote: `xnote --show` when XNote is not
+running opens the hidden notes in the same pass as the visible ones, while
+their files still say hidden, so the extension offers them last. A hidden
+note whose id sorts before a visible one with the same first line then
+swaps records with it for that session.
 
 If a note cannot be matched, it is left exactly where the compositor put it.
 Nothing is guessed.
@@ -134,11 +148,16 @@ package builds and passes lintian.
 
 The behavioural test runs a nested headless GNOME Shell with its own config,
 data, state and runtime directories and its own session bus against a scratch
-fixture: five notes (two same-titled and empty, one with a bold first line)
-beside a hidden empty one. It moves them, relaunches XNote and asserts every
-visible one came back — including the workspace — and that the hidden one
-took no record; then it simulates screen locks and asserts that nothing moves
-at unlock, that a move straight after it sticks, that `enable()` part way
+fixture: seven notes (two same-titled and empty, two more sharing a first
+line and told apart by size, one with a bold first line) beside a hidden
+empty one. The second pair's ids sort one way byte by byte and the other way
+by locale, and the fixture's directory lists them against id order; the test
+asserts each of those windows got the id of the note XNote opened in it. It
+moves the notes, relaunches XNote and asserts every visible one came back —
+including the workspace, and each of that pair to its own place rather than
+the other's — and that the hidden one took no record; then it simulates
+screen locks and asserts that nothing moves at unlock, that a move straight
+after it sticks, that `enable()` part way
 through or after mutter's placement puts a note back without saving the
 compositor's move, and that a failed write cannot leave the extension half
 turned off. Each regression check fails on the release before its fix. It depends on a private test harness, so it runs

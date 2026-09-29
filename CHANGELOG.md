@@ -2,6 +2,15 @@
 
 All notable changes to XNote Placement are documented here.
 
+## 1.1.5 — 2026-09-29
+
+- Fix: notes that share a first line (several empty ones, typically) could
+  each be keeping a place first saved by another of them. With XNote 3.2.3
+  or later they are paired exactly: XNote opens its notes in id order, and
+  the extension now orders ids the same way, byte by byte, rather than by
+  the desktop's locale, which sorts letters regardless of case while XNote's
+  ids mix both. After upgrading both, such notes may trade places once.
+
 ## 1.1.4 — 2026-09-29
 
 - No change to the extension. The build, test and CI scripts and the

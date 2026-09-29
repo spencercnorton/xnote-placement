@@ -44,9 +44,10 @@ Nothing to configure; there are no settings.
 identity the compositor can see, so the extension reproduces each note's
 title — its first line as XNote displays it, formatting stripped — from its
 local file and matches on that. Notes that share a first line are handed out
-in a stable order, visible notes before hidden ones, and one that is already
-open keeps the record of the place it occupies. A note that cannot be matched
-is left exactly where the compositor put it.
+in id order, visible notes before hidden ones; XNote 3.2.3 and later opens
+its notes in the same order, so each gets its own record. A note that is
+already open keeps the record of the place it occupies, and one that cannot
+be matched is left exactly where the compositor put it.
 
 **Knows which monitor is which.** Monitors are keyed by serial number first,
 because identical models cannot be told apart otherwise and a monitor's index
@@ -80,7 +81,8 @@ gnome-extensions enable xnote-placement@spencercnorton.github.io
 
 ### Any GNOME Shell 50 desktop — from a release
 
-Any GNOME Shell 50 session on Wayland, with XNote 3.0.2 or later installed.
+Any GNOME Shell 50 session on Wayland, with XNote 3.0.2 or later installed
+(3.2.3 or later to tell apart notes that share a first line exactly).
 Download `xnote-placement.shell-extension.zip` from the
 [latest release](https://github.com/spencercnorton/xnote-placement/releases/latest), then:
 

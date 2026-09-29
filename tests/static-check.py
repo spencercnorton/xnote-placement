@@ -59,7 +59,7 @@ def main() -> None:
     assert metadata["name"] == "XNote Placement"
     assert metadata["shell-version"] == ["50"]
     assert "version" not in metadata
-    assert metadata["version-name"] == "1.1.4"
+    assert metadata["version-name"] == "1.1.5"
     assert metadata["url"] == "https://github.com/spencercnorton/xnote-placement"
 
     source = EXTENSION.read_text(encoding="utf-8")
@@ -68,6 +68,8 @@ def main() -> None:
     assert source.isascii(), "extension.js is plain ASCII: an invisible character reads as obfuscation"
     assert not has_comment(source), \
         "extension.js carries no comments: the why goes in docs/how-it-works.md or AGENTS.md"
+    assert "localeCompare" not in source, \
+        "ids compare byte by byte, the order XNote opens notes in; a locale folds case"
     assert "this._laterIds.add(id)" in source
     assert "this._laters.remove(id)" in source
     assert "Gio.FileCreateFlags.PRIVATE" in source
