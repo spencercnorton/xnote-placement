@@ -1,0 +1,23 @@
+name: Feature request
+description: Something the extension should do, or do differently.
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What you are trying to do and what gets in the way today.
+      placeholder: Notes on a monitor that is off at login are left where the compositor puts them; I would rather they waited for the monitor.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would like to happen
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+      description: Including "the compositor could do this itself" — if a Wayland protocol or a Mutter setting already covers it, say which.

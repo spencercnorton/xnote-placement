@@ -1,0 +1,29 @@
+XNote Placement — provenance and third-party notices
+====================================================
+
+Origin
+------
+Original work first committed in 2026 and published at
+https://github.com/spencercnorton/xnote-placement. It is not copied from
+XNote, Xpad, another GNOME Shell extension or any other third-party project.
+
+Copyright and licence
+---------------------
+Copyright 2026 Spencer Norton.
+
+All files in this repository are licensed GPL-3.0-or-later. The canonical
+licence text is in LICENSE.
+
+Third-party content
+-------------------
+None. This repository vendors no third-party source, artwork, data, fonts,
+media, generated assets or copies of XNote/Xpad. Runtime imports are supplied
+by GNOME Shell and the host system.
+
+Runtime relationship
+--------------------
+The extension recognizes windows created by the separately installed XNote
+application and reads XNote's user-owned local note files only to match a pad
+identity. XNote is a GPL-3.0-or-later fork of Xpad maintained and distributed
+separately; neither application source nor user note content is part of this
+distribution.

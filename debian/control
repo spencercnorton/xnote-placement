@@ -1,0 +1,27 @@
+Source: gnome-shell-extension-xnote-placement
+Section: gnome
+Priority: optional
+Maintainer: Norvi <apt@globalentry.systems>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/spencercnorton/xnote-placement
+Rules-Requires-Root: no
+
+Package: gnome-shell-extension-xnote-placement
+Architecture: all
+Depends:
+ ${misc:Depends},
+ gnome-shell (>= 50),
+ gnome-shell (<< 51)
+Recommends:
+ xnote
+Provides: xnote-placement
+Description: GNOME Shell extension that puts XNote sticky notes back where they were
+ XNote is a native Wayland application, and Wayland gives a client no way to
+ place its own window: no position, no monitor, no workspace. This extension
+ is the compositor side of that job. It remembers where each XNote note was
+ -- position, monitor and workspace -- and puts it back every time the note
+ opens, keyed by the note's title and stored under ~/.local/state.
+ .
+ After installing, log out and back in once, then enable it with
+ `gnome-extensions enable xnote-placement@spencercnorton.github.io`.

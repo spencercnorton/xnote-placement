@@ -1,0 +1,71 @@
+name: Bug report
+description: A note came back in the wrong place, or the extension misbehaves.
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Remove note titles, monitor serials and paths from anything you paste. Never paste `geometry.json` unedited.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what happened instead.
+      placeholder: Logged in, the note that lives on the right monitor opened centred on the left one.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Move a note to the second monitor
+        2. Quit XNote (`xnote --quit`), start it again
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: shell
+    attributes:
+      label: GNOME Shell version
+      description: The output of `gnome-shell --version`.
+      placeholder: GNOME Shell 50.1
+    validations:
+      required: true
+  - type: input
+    id: xnote
+    attributes:
+      label: XNote version
+      description: The output of `xnote --version`.
+      placeholder: XNote 3.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How the extension is installed
+      options: ["APT package (gnome-shell-extension-xnote-placement)", "Copied into ~/.local/share/gnome-shell/extensions", "Not sure"]
+    validations:
+      required: true
+  - type: input
+    id: monitors
+    attributes:
+      label: Monitors
+      description: How many, whether any are identical models, and whether one had just woken up or been switched (KVM) when it happened.
+      placeholder: 3 × the same 32-inch model; the middle one had just woken from standby
+    validations:
+      required: true
+  - type: dropdown
+    id: session
+    attributes:
+      label: Session type
+      description: The extension does nothing on X11.
+      options: ["Wayland", "X11", "Not sure"]
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Shell log
+      description: "`journalctl --user -b /usr/bin/gnome-shell | grep -i xnote-placement`, with note titles removed."
+      render: text

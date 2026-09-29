@@ -1,0 +1,87 @@
+# Changelog
+
+All notable changes to XNote Placement are documented here.
+
+## 1.1.4 — 2026-09-29
+
+- No change to the extension. The build, test and CI scripts and the
+  repository templates carry no comments.
+
+## 1.1.3 — 2026-09-29
+
+- Fix: a note whose first line has formatting (bold, italic, underline or
+  strikethrough) was never matched, so it opened wherever the compositor put
+  it. XNote keeps formatting inline in the note file; the extension now reads
+  the title the way XNote displays it.
+- Fix: a hidden note could take the saved place of a visible note sharing its
+  first line — typically an empty one — so that note opened at the hidden
+  note's spot. Visible notes are matched first.
+- Fix: at login GNOME Shell can switch the extension on while XNote is still
+  opening its notes. A note the compositor was still placing could have that
+  placement saved over its record, and one it had finished placing was put
+  back but snapped back again the first time it was moved. When the extension
+  starts, only a note sitting exactly on its record counts as settled.
+
+## 1.1.2 — 2026-09-29
+
+- `extension.js` carries no comments. What they explained is in
+  [docs/how-it-works.md](docs/how-it-works.md). The code itself is
+  unchanged: its token stream is identical to 1.1.1's.
+
+## 1.1.1 — 2026-09-29
+
+- Fix: a note moved straight after unlocking the screen snapped back to its
+  old place, and a move to another workspace was not saved. The Shell turns
+  extensions off while the screen is locked; on unlock, notes that were
+  already open were treated as if the compositor were still placing them.
+- Fix: two notes sharing a first line (typically empty ones) could swap
+  places at unlock. A note that is already open now keeps the record of the
+  place it occupies.
+- A failed geometry write while the screen locks no longer leaves the
+  extension half turned off until the next login.
+- The extension description names its XNote requirement.
+- The shipped extension no longer reads a test-only environment variable; the
+  behavioural test gives its nested Shell private config and state
+  directories instead.
+- The Debian package description gives the enable step in the right order,
+  and the storage example in the documentation uses placeholder values.
+
+## 1.1.0 — 2026-09-21
+
+- First public release, on GitHub and in the APT repository as
+  `gnome-shell-extension-xnote-placement` (installs system-wide; XNote's
+  package recommends it).
+- The extension UUID is now `xnote-placement@spencercnorton.github.io`.
+  Upgrading from 1.0.x: disable and remove the old directory, install this
+  one, log out and back in, enable. Saved geometry is kept.
+- Community files, issue forms, a GitHub CI workflow (ESM parse, release
+  invariants, shellcheck, package build) and a README that explains the
+  matching, the storage and the timing.
+
+## 1.0.4 — 2026-09-19 (unreleased)
+
+- Cancel pending GNOME Shell `Meta.Laters` callbacks when the extension is
+  disabled.
+- Store geometry in a private `0700` directory and `0600` file, including
+  migration of existing state.
+- Add the public licence, provenance, privacy, install and release metadata.
+
+## 1.0.3 — 2026-08-19
+
+- Restore notes even when Mutter reports their first real geometry through
+  `position-changed` without an earlier `size-changed` signal.
+- Keep compositor placement from overwriting the saved position at startup.
+
+## 1.0.2 — 2026-08-03
+
+- Preserve workspaces when XNote windows are torn down.
+- Save workspace-only moves and re-assert placement through Mutter's startup
+  settle window.
+
+## 1.0.1 — 2026-08-03
+
+- Align extension metadata with the first CI-corrected release.
+
+## 1.0.0 — 2026-08-03
+
+- Initial release for GNOME Shell 50 and XNote on Wayland.
