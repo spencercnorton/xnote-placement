@@ -2,6 +2,20 @@
 
 All notable changes to XNote Placement are documented here.
 
+## 1.1.6 — 2026-10-07
+
+- No change to the extension. Development moved to this repository: pull
+  requests are merged here, and a `v*` tag publishes the `.deb` with the
+  tagged source as a GitHub Release.
+- Fix: `scripts/build-deb.sh` could fail at random while checking the built
+  package. It now reads the package listing once and checks that.
+- The README names the whole suite in its footer, and installs from
+  apt.norvitech.com.
+- Releases no longer carry `xnote-placement.shell-extension.zip`. The APT
+  repository is the only release channel.
+- Packaging: the maintainer is NorviTech, and the package recommends
+  `norvi-archive-keyring`, which keeps the APT source and key up to date.
+
 ## 1.1.5 — 2026-09-29
 
 - Fix: notes that share a first line (several empty ones, typically) could

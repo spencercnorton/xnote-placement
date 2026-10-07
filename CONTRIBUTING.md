@@ -5,15 +5,13 @@ the process is deliberately light — but a few things are fixed.
 
 ## How changes land
 
-This GitHub repository is a **release mirror**: every commit on `main` is a
-tagged release built from a private development tree, and `main` only ever
-moves forward by a release. That has two consequences for contributors:
+Development happens in this repository. Pull requests target `main`; once
+CI passes, an accepted pull request is squash-merged, so it lands as one
+commit credited to you. A release is a `vX.Y.Z` tag on `main`: the Release
+workflow builds the `.deb` and publishes it with the tagged source, and
+[CHANGELOG.md](CHANGELOG.md) says what changed.
 
-- Pull requests are reviewed **here**, but they are not merged here. An
-  accepted change is applied to the development tree and ships in the next
-  tagged release; the pull request is then closed with a reference to that
-  release, and you keep the credit in the release notes.
-- Please do not rebase your pull request onto anything but `main`.
+- Keep a pull request to one change, and rebase it onto `main` only.
 
 ## Before you start
 
@@ -56,8 +54,7 @@ you exercised a change on your own desktop.
 - Commits carry a `Signed-off-by:` line (`git commit -s`, the Developer
   Certificate of Origin). There is no CLA.
 - No secrets, hostnames, personal data or screenshots of a real desktop in
-  the diff — the export gate rejects them and the pull request will be sent
-  back.
+  the diff; a pull request that carries them is sent back.
 
 ## Out of scope
 
