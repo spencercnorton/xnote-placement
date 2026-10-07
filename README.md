@@ -13,7 +13,7 @@
   <a href="https://norvitech.com"><img alt="NorviTech Suite" src="https://img.shields.io/badge/NorviTech-Suite-FD8024.svg"></a>
   <a href="https://github.com/spencercnorton/xnote-placement/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/spencercnorton/xnote-placement/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://github.com/spencercnorton/xnote-placement/tags"><img alt="Latest release" src="https://img.shields.io/github/v/tag/spencercnorton/xnote-placement?label=release&sort=semver"></a>
-  <a href="https://apt.globalentry.systems"><img alt="APT repository" src="https://img.shields.io/badge/apt-Ubuntu%2026.04-e95420.svg?logo=ubuntu&logoColor=white"></a>
+  <a href="https://norvitech.com/#install"><img alt="APT repository" src="https://img.shields.io/badge/apt-Ubuntu%2026.04-e95420.svg?logo=ubuntu&logoColor=white"></a>
   <a href="LICENSE"><img alt="Licence" src="https://img.shields.io/badge/licence-GPL--3.0--or--later-blue.svg"></a>
   <a href="https://buy.stripe.com/8x26oH2U44f65TRe574wM04"><img alt="Donate" src="https://img.shields.io/badge/donate-Stripe-635bff.svg?logo=stripe&logoColor=white"></a>
 </p>
@@ -62,13 +62,16 @@ the stored place and records nothing, which converges without a magic delay.
 
 ## Install
 
+It needs a GNOME Shell 50 session on Wayland and XNote 3.0.2 or later (3.2.3
+or later to tell apart notes that share a first line exactly).
+
 ### Ubuntu 26.04 — from the APT repository
 
 The same repository that serves XNote; `sudo apt install xnote` already
 pulls this package in as a recommendation.
 
 ```bash
-curl -fsSL https://apt.globalentry.systems/setup.sh | sudo sh
+curl -fsSL https://apt.norvitech.com/setup.sh | sudo sh
 sudo apt install gnome-shell-extension-xnote-placement
 ```
 
@@ -77,17 +80,6 @@ then enable it:
 
 ```bash
 gnome-extensions enable xnote-placement@spencercnorton.github.io
-```
-
-### Any GNOME Shell 50 desktop — from a release
-
-Any GNOME Shell 50 session on Wayland, with XNote 3.0.2 or later installed
-(3.2.3 or later to tell apart notes that share a first line exactly).
-Download `xnote-placement.shell-extension.zip` from the
-[latest release](https://github.com/spencercnorton/xnote-placement/releases/latest), then:
-
-```bash
-gnome-extensions install --force xnote-placement.shell-extension.zip
 ```
 
 ### From source
@@ -100,9 +92,10 @@ install -m 0644 extension.js metadata.json \
   ~/.local/share/gnome-shell/extensions/xnote-placement@spencercnorton.github.io/
 ```
 
-After either, log out and back in, then `gnome-extensions enable
-xnote-placement@spencercnorton.github.io`. The extension is not on
-extensions.gnome.org yet. It does nothing on X11.
+After installing from source, log out and back in, then `gnome-extensions
+enable xnote-placement@spencercnorton.github.io`. The APT repository is the
+only release channel: the extension is not listed on extensions.gnome.org,
+and releases carry no extension zip. It does nothing on X11.
 
 **Upgrading from 1.0.x:** the extension's UUID changed to
 `xnote-placement@spencercnorton.github.io`. Disable the 1.0.x extension,
@@ -130,7 +123,7 @@ Nothing leaves the machine: the extension has no network functionality.
 
 - Bugs and feature requests: [open an issue](https://github.com/spencercnorton/xnote-placement/issues/new/choose). Questions: [Discussions](https://github.com/spencercnorton/xnote-placement/discussions).
 - Security reports: [private vulnerability reporting](https://github.com/spencercnorton/xnote-placement/security/advisories/new) — see [SECURITY.md](SECURITY.md). There is no e-mail address; that is deliberate.
-- Pull requests are welcome; read [CONTRIBUTING.md](CONTRIBUTING.md) first — this repository is a release mirror, and accepted changes ship in the next tagged release.
+- Pull requests are welcome; read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 - If XNote Placement saves you time, you can [support its development](https://buy.stripe.com/8x26oH2U44f65TRe574wM04).
 
 ## Development
@@ -164,5 +157,9 @@ every release.
   <a href="https://github.com/spencercnorton/xnote">XNote</a> ·
   <a href="https://github.com/spencercnorton/xnote-placement">XNote Placement</a> ·
   <a href="https://github.com/spencercnorton/snipsnap">SnipSnap</a> ·
+  <a href="https://github.com/spencercnorton/conductor">Conductor</a> ·
+  <a href="https://github.com/spencercnorton/norvi-os">NorviOS</a> ·
+  <a href="https://github.com/spencercnorton/indigo">Indigo</a> ·
+  <a href="https://github.com/spencercnorton/roadtrack">Road Track</a> ·
   <a href="https://norvitech.com">norvitech.com</a>
 </p>

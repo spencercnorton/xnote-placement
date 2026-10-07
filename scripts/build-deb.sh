@@ -9,15 +9,6 @@ stamp=${SOURCE_DATE_EPOCH:-$(date +%s)}
 export SOURCE_DATE_EPOCH="$stamp"
 mkdir -p "$out"
 
-if [ -e "$root/.public-release.toml" ]; then
-    echo 'private checkout: building the .deb only; the source tarball comes from the export tree' >&2
-else
-    tar -C "$root/.." --sort=name --mtime="@$stamp" --owner=0 --group=0 --numeric-owner \
-        --exclude=.git --exclude=dist --exclude=debian/changelog \
-        --transform "s|^$(basename "$root")|$pkg-$version|" \
-        -czf "$out/${pkg}_$version.tar.gz" "$(basename "$root")"
-fi
-
 changelog="$root/debian/changelog"
 saved=$(mktemp)
 if [ -f "$changelog" ]; then
@@ -32,7 +23,7 @@ $pkg ($version) resolute; urgency=medium
   * Release $version. The release notes:
     https://github.com/spencercnorton/xnote-placement/blob/main/CHANGELOG.md
 
- -- Norvi <apt@globalentry.systems>  $(date -u -d "@$stamp" '+%a, %d %b %Y %H:%M:%S +0000')
+ -- NorviTech <apt@globalentry.systems>  $(date -u -d "@$stamp" '+%a, %d %b %Y %H:%M:%S +0000')
 CHANGELOG
 (cd "$root" && dpkg-buildpackage -us -uc -b)
 deb="$out/${pkg}_${version}_all.deb"
@@ -41,8 +32,9 @@ rm -f "$root"/../"${pkg}"_"${version}"_*.buildinfo "$root"/../"${pkg}"_"${versio
 
 uuid=$(sed -n 's/^ *"uuid": *"\([^"]*\)".*/\1/p' "$root/metadata.json")
 test -n "$uuid"
-dpkg-deb -c "$deb" | grep -q "usr/share/gnome-shell/extensions/$uuid/extension.js" || {
+contents=$(dpkg-deb -c "$deb")
+grep -q "usr/share/gnome-shell/extensions/$uuid/extension.js" <<<"$contents" || {
     echo "ERROR - extension.js is not installed under the uuid directory $uuid" >&2; exit 1; }
-dpkg-deb -c "$deb" | grep -q "usr/share/gnome-shell/extensions/$uuid/metadata.json" || {
+grep -q "usr/share/gnome-shell/extensions/$uuid/metadata.json" <<<"$contents" || {
     echo "ERROR - metadata.json is not installed under the uuid directory $uuid" >&2; exit 1; }
 ls -l "$out"

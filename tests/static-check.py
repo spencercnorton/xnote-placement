@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 UUID = "xnote-placement@spencercnorton.github.io"
 EXTENSION = ROOT / "extension.js"
 METADATA = ROOT / "metadata.json"
-SCRIPTS = ["scripts/build-deb.sh", "debian/rules", ".github/workflows/ci.yml", ".github/FUNDING.yml",
+SCRIPTS = ["scripts/build-deb.sh", "debian/rules", ".github/workflows/ci.yml", ".github/workflows/release.yml",
+           ".github/FUNDING.yml",
            *sorted(str(p.relative_to(ROOT)) for p in (ROOT / ".github/ISSUE_TEMPLATE").glob("*.yml"))]
 DOCS = ["README.md", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "SUPPORT.md", "CODE_OF_CONDUCT.md",
         "docs/how-it-works.md", ".github/PULL_REQUEST_TEMPLATE.md"]
@@ -59,7 +60,7 @@ def main() -> None:
     assert metadata["name"] == "XNote Placement"
     assert metadata["shell-version"] == ["50"]
     assert "version" not in metadata
-    assert metadata["version-name"] == "1.1.5"
+    assert metadata["version-name"] == "1.1.6"
     assert metadata["url"] == "https://github.com/spencercnorton/xnote-placement"
 
     source = EXTENSION.read_text(encoding="utf-8")
